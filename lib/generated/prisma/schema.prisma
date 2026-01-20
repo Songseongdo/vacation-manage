@@ -1,0 +1,60 @@
+// datasource db {
+//   provider = "postgresql"
+//   url      = env("DATABASE_URL")
+// }
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Employee {
+  id          Int      @id @default(autoincrement())
+  name        String
+  joinedAt    DateTime // 입사일
+  leavePolicy String // 'CALENDAR' | 'ANNIVERSARY'
+  type        String // '약사' | '전산' | '조제'
+
+  vacations Vacation[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Vacation {
+  id         Int @id @default(autoincrement())
+  year       Int
+  totalHours Int
+  usedHours  Int @default(0)
+
+  employee       Employee        @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+  employeeId     Int
+  vacationUsages VacationUsage[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([employeeId, year])
+}
+
+model VacationUsage {
+  id Int @id @default(autoincrement())
+
+  startDate DateTime // 휴가 시작일
+  endDate   DateTime // 휴가 종료일 (같은 날 가능)
+  usedHours Int // 1 ~ 8
+
+  type   String // 'FULL' | 'HALF' | 'HOURLY'
+  reason String? // 연차 사유
+
+  vacation   Vacation @relation(fields: [vacationId], references: [id], onDelete: Cascade)
+  vacationId Int
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

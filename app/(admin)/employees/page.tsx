@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { getEmployeesWithVacation } from "./actions";
 import EmployeePageClient from "./EmployeePageClient";
 

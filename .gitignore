@@ -45,3 +45,5 @@ next-env.d.ts
 *.db-journal
 
 package-lock.json
+.vercel
+.env*.local

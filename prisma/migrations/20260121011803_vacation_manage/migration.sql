@@ -3,6 +3,9 @@ CREATE TABLE "Employee" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "name" TEXT NOT NULL,
     "joinedAt" DATETIME NOT NULL,
+    "leavePolicy" TEXT NOT NULL,
+    "type" TEXT NOT NULL,
+    "resignedAt" DATETIME,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" DATETIME NOT NULL
 );

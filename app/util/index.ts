@@ -1,3 +1,5 @@
+import { EmployeeType } from "@/lib/constants";
+
 export function hoursToDays(hours: number) {
 	return Number((hours / 8).toFixed(2));
 }
@@ -24,4 +26,18 @@ export function normalizeDate(date: Date): string {
 	const d = String(date.getDate()).padStart(2, "0");
 
 	return `${y}-${m}-${d}`;
+}
+
+export function getEmployeeLabel(type: EmployeeType) {
+	switch (type) {
+		case "REGULAR":
+			return "정규직";
+		case "CONTRACT":
+			return "계약직";
+		case "PART_TIME":
+			return "파트타임";
+		default:
+			const _exhaustive: never = type;
+			return _exhaustive;
+	}
 }

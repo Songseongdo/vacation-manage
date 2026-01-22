@@ -41,6 +41,8 @@ export default function AdminCalendarPage() {
 	const handleEventClick = (arg: EventClickArg) => {
 		if (arg.event.extendedProps === undefined) return;
 
+		console.log("handleEventClick", arg.event.extendedProps);
+
 		setDeleModalData({
 			usage: arg.event.extendedProps.usage,
 			name: arg.event.extendedProps.name,

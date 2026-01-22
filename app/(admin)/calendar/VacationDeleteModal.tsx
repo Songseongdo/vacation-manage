@@ -78,9 +78,7 @@ export default function VacationDeleteModal({
 				{/* 신청사유 */}
 				<div className={rowStyle}>
 					<div className={labelStyle}>신청사유</div>
-					<div className={dataStyle}>
-						{typeUIText(usage.reason ?? "")}
-					</div>
+					<div className={dataStyle}>{usage.reason ?? ""}</div>
 				</div>
 			</div>
 

@@ -129,6 +129,7 @@ export async function getEmployeesList(params: {
 							endDate: true,
 							usedHours: true,
 							type: true,
+							reason: true,
 						},
 					},
 				},

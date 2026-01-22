@@ -5,11 +5,13 @@ export const LEAVE_POLICY = {
 	ANNIVERSARY: "ANNIVERSARY",
 } as const;
 
-export const EMPLOYEE_TYPE_LABEL: Record<string, string> = {
+export const EMPLOYEE_TYPE_LABEL = {
 	REGULAR: "정규직",
 	CONTRACT: "계약직",
 	PART_TIME: "파트타임",
-};
+} as const;
+export type EmployeeType = keyof typeof EMPLOYEE_TYPE_LABEL;
+// "REGULAR" | "CONTRACT" | "PART_TIME"
 
 export const VACATION_TYPES = {
 	FULL: "FULL",

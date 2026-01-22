@@ -3,6 +3,8 @@ import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
 import DeleteButton from "./DeleteButton";
 import ResignButton from "./ResignButton";
+import { getEmployeeLabel, typeUIText } from "@/app/util";
+import { EmployeeType } from "@/lib/constants";
 
 export default async function EmployeeDetailPage({
 	params,
@@ -34,7 +36,9 @@ export default async function EmployeeDetailPage({
 			{/* 직원 기본 정보 */}
 			<section className="mb-6">
 				<p>입사일: {employee.joinedAt.toISOString().slice(0, 10)}</p>
-				<p>직원 구분: {employee.type}</p>
+				<p>
+					직원 구분: {getEmployeeLabel(employee.type as EmployeeType)}
+				</p>
 			</section>
 
 			{/* 연도별 휴가 */}
@@ -51,8 +55,16 @@ export default async function EmployeeDetailPage({
 						<ul className="mt-2 text-sm">
 							{vac.vacationUsages.map((u) => (
 								<li key={u.id}>
-									{u.createdAt.toISOString().slice(0, 10)} -{" "}
-									{u.usedHours / 8}일 ({u.type})
+									<span className="font-semibold">
+										{u.startDate.toISOString().slice(0, 10)}{" "}
+										~ {u.endDate.toISOString().slice(0, 10)}
+									</span>
+
+									{/* {u.createdAt.toISOString().slice(0, 10)} -{" "} */}
+									<span className="ml-2">
+										{u.usedHours / 8}일 (
+										{typeUIText(u.type)})
+									</span>
 								</li>
 							))}
 						</ul>

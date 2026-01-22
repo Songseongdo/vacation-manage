@@ -134,6 +134,7 @@ export default function VacationCreateModal({
 				endDate: endDate,
 				startTime,
 				usedDay,
+				reason,
 			});
 
 			alert(res.message);
